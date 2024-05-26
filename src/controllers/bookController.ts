@@ -52,7 +52,7 @@ export const createBook = async (req: AuthRequest, res: Response) => {
 export const updateBook = async (req: AuthRequest, res: Response) => {
     try {
         const { id } = req.params;
-        const { title, author, price, publishDate } = req.body;
+        const { title, author, price, publishedDate } = req.body;
 
         const book = await prisma.book.findUnique({ where: { id: parseInt(id) } });
 
@@ -62,7 +62,7 @@ export const updateBook = async (req: AuthRequest, res: Response) => {
 
         const updatedBook = await prisma.book.update({
             where: { id: parseInt(id) },
-            data: { title, author, price, publishedDate: new Date(publishDate) }
+            data: { title, author, price, publishedDate: new Date(publishedDate) }
         });
 
         return res.send(updatedBook);
